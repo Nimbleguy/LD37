@@ -1,57 +1,58 @@
 package entity;
 
-import java.awt.image.BufferedImage;
-import java.util.List;
-
-import events.EntityCollisionEvent;
-import events.EntityMoveEvent;
+import java.awt.Image;
+import java.util.ArrayList;
 
 public class Entity {
-	private static List<Entity> entities;
+	private int spriteIndex;
+	private ArrayList<Image> sprites;
+	double x;
+	double y;
 
-	private double[] loc = new double[2];
-	BufferedImage sprite;
-	CollisionBox hitbox;
-
-
-	public Entity(double x, double y, BufferedImage image, CollisionBox box){
-		loc = new double[]{x,y};
-		hitbox = box;
-		sprite = image;
-		hitbox = box;
+	public Entity(ArrayList<Image> sprites, double x, double y){
+		this.sprites = sprites;
+		this.spriteIndex = 0;
+		this.x = x;
+		this.y = y;
 	}
-	public Entity(double[] center, BufferedImage image, CollisionBox box){
-		loc = center;
-		hitbox = box;
-		sprite = image;
-		hitbox = box;
+	
+	public ArrayList<Image> getSprites(){
+		return sprites;
 	}
-
-	public boolean teleport(double x, double y, boolean ignoreCancelled){
-		boolean returnVal = new EntityMoveEvent(this,x,y).trigger();
-		if (returnVal){
-			for (Entity e : entities){
-				if (hitbox.intersects(e.getHitbox())){
-					returnVal = returnVal && new EntityCollisionEvent(this, e).trigger();
-				}
-			}
-		}
-		if (returnVal){
-			loc = new double[]{x,y};
-		}
-		return returnVal;
+	
+	public int getSpriteIndex(){
+		return spriteIndex;
+	}
+	
+	public void setSpriteIndex(int spriteIndex){
+		this.spriteIndex = spriteIndex;
+	}
+	
+	public void setSprites(ArrayList<Image> sprites){
+		this.spriteIndex = 0;
+		this.sprites = sprites;
 	}
 
-	public double[] getLoc(){
-		return loc;
-	}
 	public double getX(){
-		return loc[0];
+		return x;
 	}
 	public double getY(){
-		return loc[1];
+		return y;
 	}
-	public CollisionBox getHitbox(){
-		return hitbox;
+
+	public int getDrawX(){
+		return (int)Math.round(x);
+	}
+	public int getDrawY(){
+		return (int)Math.round(y);
+	}
+
+	public Image getSprite(){
+		return sprites.get(spriteIndex);
+	}
+	
+	public void update(){
+		x+=1;
+		y+=0.5;
 	}
 }
