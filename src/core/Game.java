@@ -17,8 +17,12 @@ public class Game {
 		instance.run();
 	}
 
-	private static final DisplayMode[] modes1 = {
-		new DisplayMode(800,600,32,0),//first two are resolution, third is bitdepth, fourth is refreshrate
+	private static final DisplayMode[] modes1 = {//first two are resolution, third is bitdepth, fourth is refreshrate
+		new DisplayMode(1280,800,32,0),
+		new DisplayMode(1280,800,24,0),
+		new DisplayMode(1280,800,16,0),
+		
+		new DisplayMode(800,600,32,0),
 		new DisplayMode(800,600,24,0),
 		new DisplayMode(800,600,16,0),
 
@@ -35,7 +39,7 @@ public class Game {
 	private ArrayList<Entity> toPaint;
 	private JFrame frame;
 
-	public void run(){//so there cant be multiple running at once
+	public void run(){
 		sc = new ScreenManager();
 		frame = new JFrame();
 		toPaint = new ArrayList<Entity>();
@@ -60,7 +64,7 @@ public class Game {
 					Thread.sleep(10);
 					ticks++;
 					if (ticks>=500){
-						running=false;
+						running=false;//sleeps after 500 ticks
 					}
 					try{
 						Thread.sleep(20L);
