@@ -40,6 +40,7 @@ public class Game {
 	private JFrame frame;
 
 	public void run(){
+		System.out.println("Initializing");
 		sc = new ScreenManager();
 		frame = new JFrame();
 		toPaint = new ArrayList<Entity>();
@@ -54,7 +55,7 @@ public class Game {
 		try{
 			DisplayMode dm = sc.findFirstCompatibleMode(modes1);
 			sc.setToFullScreen(frame, dm);
-			long ticks = 0;
+			new KeyboardHandler(sc.getFullScreenWindow());//registers the keyboard handler
 			try{
 				while(running){
 					Graphics2D g = sc.getGraphics();
@@ -62,10 +63,6 @@ public class Game {
 					g.dispose();
 					sc.update();
 					Thread.sleep(10);
-					ticks++;
-					if (ticks>=500){
-						running=false;//sleeps after 500 ticks
-					}
 					try{
 						Thread.sleep(20L);
 					}catch(Exception e){
@@ -102,6 +99,11 @@ public class Game {
 
 	public ArrayList<Entity> getEntities() {
 		return entities;
+	}
+	
+	public static void stop(){
+		System.out.println("Terminating");
+		instance.running = false;
 	}
 
 	public static Game getInstance(){

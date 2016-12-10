@@ -1,4 +1,4 @@
-package core;
+package events;
 
 public enum PriorityValue {
 	LOWEST		(-3),
