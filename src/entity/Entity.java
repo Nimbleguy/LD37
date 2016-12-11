@@ -16,8 +16,8 @@ public class Entity {
 	private ArrayList<Image> sprites;
 	private double x;
 	private double y;
-	private List<Double> xMoves;
-	private List<Double> yMoves;
+	private double nextX;
+	private double nextY;
 	private Vector vel;
 	private Hitbox hitbox;
 	private List<Entity> touching;
@@ -28,11 +28,11 @@ public class Entity {
 		this.spriteIndex = 0;
 		this.x = x;
 		this.y = y;
+		nextX = x;
+		nextY = y;
 		this.hitbox = hitbox;
 		touching = new ArrayList<Entity>();
 		vel = new Vector(0,0,0);
-		xMoves = new ArrayList<Double>();
-		yMoves = new ArrayList<Double>();
 	}
 
 	public ArrayList<Image> getSprites(){
@@ -60,13 +60,61 @@ public class Entity {
 	}
 
 	public void setX(double x){
-		xMoves.add(this.x-x);
-		moved = true;
+		nextX = x;
+		if (nextX != this.x){
+			moved = true;
+		}
+
+		if (moved){
+			boolean doMove = true;
+			double prevX = this.x;
+			this.x = nextX;
+			List<Entity> nowTouching = new ArrayList<Entity>();
+			for (Entity other : Game.getInstance().getEntities()){
+				if (other != this){
+					if (isTouching(other)){
+						nowTouching.add(other);
+						doMove = doMove && new CollisionEvent(this,other,!touching.contains(other)).trigger();
+					}
+				}
+			}
+			if (doMove){
+				touching = nowTouching;
+			}else{
+				this.x=prevX;
+			}
+		}
+		nextX = this.x;
+		moved = false;
 	}
 
 	public void setY(double y){
-		yMoves.add(this.y-y);
-		moved = true;
+		nextX = y;
+		if (nextX != this.y){
+			moved = true;
+		}
+
+		if (moved){
+			boolean doMove = true;
+			double prevX = this.y;
+			this.y = nextX;
+			List<Entity> nowTouching = new ArrayList<Entity>();
+			for (Entity other : Game.getInstance().getEntities()){
+				if (other != this){
+					if (isTouching(other)){
+						nowTouching.add(other);
+						doMove = doMove && new CollisionEvent(this,other,!touching.contains(other)).trigger();
+					}
+				}
+			}
+			if (doMove){
+				touching = nowTouching;
+			}else{
+				this.x=prevX;
+			}
+		}
+		nextX = this.x;
+		moved = false;
 	}
 
 	public int getDrawX(){
@@ -109,57 +157,38 @@ public class Entity {
 	public void update(){
 
 		double[] loc = vel.calcMove(x, y, true);
-		xMoves.add(loc[0]);
-		yMoves.add(loc[1]);
-		if (!(xMoves.size() == 1 && yMoves.size() == 1) || !(xMoves.get(0) == x && yMoves.get(0) == y)){
+		nextX = loc[0];
+		nextY = loc[1];
+
+
+		if (!(nextX == x && nextY == y)){
 			moved = true;
 		}
 
 		if (moved){
-
-			for (Double move : xMoves){
-				boolean doMove = true;
-				double prevX = x;
-				x += move;
-				List<Entity> nowTouching = new ArrayList<Entity>();
-				for (Entity other : Game.getInstance().getEntities()){
-					if (other != this){
-						if (isTouching(other)){
-							nowTouching.add(other);
-							doMove = doMove && new CollisionEvent(this,other,!touching.contains(other)).trigger();
-						}
+			boolean doMove = true;
+			double prevX = x;
+			double prevY = y;
+			x = nextX;
+			y = nextY;
+			List<Entity> nowTouching = new ArrayList<Entity>();
+			for (Entity other : Game.getInstance().getEntities()){
+				if (other != this){
+					if (isTouching(other)){
+						nowTouching.add(other);
+						doMove = doMove && new CollisionEvent(this,other,!touching.contains(other)).trigger();
 					}
 				}
-				if (doMove){
-					touching = nowTouching;
-				}else{
-					x=prevX;
-				}
 			}
-
-			for (Double move : yMoves){
-				boolean doMove = true;
-				double prevY = y;
-				y += move;
-				List<Entity> nowTouching = new ArrayList<Entity>();
-				for (Entity other : Game.getInstance().getEntities()){
-					if (other != this){
-						if (isTouching(other)){
-							nowTouching.add(other);
-							doMove = doMove && new CollisionEvent(this,other,!touching.contains(other)).trigger();
-						}
-					}
-				}
-				if (doMove){
-					touching = nowTouching;
-				}else{
-					y=prevY;
-				}
+			if (doMove){
+				touching = nowTouching;
+			}else{
+				x=prevX;
+				y=prevY;
 			}
-
 		}
-		xMoves.clear();
-		yMoves.clear();
+		nextX = x;
+		nextY = y;
 		moved = false;
 	}
 }
