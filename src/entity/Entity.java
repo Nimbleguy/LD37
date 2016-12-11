@@ -3,17 +3,21 @@ package entity;
 import java.awt.Image;
 import java.util.ArrayList;
 
+import core.util.Vector;
+
 public class Entity {
 	private int spriteIndex;
 	private ArrayList<Image> sprites;
 	double x;
 	double y;
+	Vector vel;
 
 	public Entity(ArrayList<Image> sprites, double x, double y){
 		this.sprites = sprites;
 		this.spriteIndex = 0;
 		this.x = x;
 		this.y = y;
+		vel = new Vector(0,0,0);
 	}
 	
 	public ArrayList<Image> getSprites(){
@@ -40,6 +44,14 @@ public class Entity {
 		return y;
 	}
 
+	public void setX(double x){
+		this.x = x;
+	}
+	
+	public void setY(double y){
+		this.y = y;
+	}
+	
 	public int getDrawX(){
 		return (int)Math.round(x);
 	}
@@ -51,8 +63,17 @@ public class Entity {
 		return sprites.get(spriteIndex);
 	}
 	
+	public void setVelocity(Vector vec){
+		vel = vec;
+	}
+	
+	public void addVelocity(Vector vec){
+		vel.add(vec);
+	}
+	
 	public void update(){
-		x+=1;
-		y+=0.5;
+		double[] loc = vel.calcMove(x, y, true);
+		x = loc[0];
+		y = loc[1];
 	}
 }

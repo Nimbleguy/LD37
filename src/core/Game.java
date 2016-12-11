@@ -21,7 +21,7 @@ public class Game {
 		new DisplayMode(1280,800,32,0),
 		new DisplayMode(1280,800,24,0),
 		new DisplayMode(1280,800,16,0),
-		
+
 		new DisplayMode(800,600,32,0),
 		new DisplayMode(800,600,24,0),
 		new DisplayMode(800,600,16,0),
@@ -78,6 +78,7 @@ public class Game {
 	}
 
 	public void drawEntities(Graphics g){
+		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 10000, 10000);
 		for (Entity e : toPaint){
 			e.update();
@@ -100,7 +101,7 @@ public class Game {
 	public ArrayList<Entity> getEntities() {
 		return entities;
 	}
-	
+
 	public static void stop(){
 		System.out.println("Terminating");
 		instance.running = false;
