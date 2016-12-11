@@ -89,15 +89,15 @@ public class Entity {
 	}
 
 	public void setY(double y){
-		nextX = y;
-		if (nextX != this.y){
+		nextY = y;
+		if (nextY != this.y){
 			moved = true;
 		}
 
 		if (moved){
 			boolean doMove = true;
-			double prevX = this.y;
-			this.y = nextX;
+			double prevY = this.y;
+			this.y = nextY;
 			List<Entity> nowTouching = new ArrayList<Entity>();
 			for (Entity other : Game.getInstance().getEntities()){
 				if (other != this){
@@ -110,10 +110,10 @@ public class Entity {
 			if (doMove){
 				touching = nowTouching;
 			}else{
-				this.x=prevX;
+				this.y=prevY;
 			}
 		}
-		nextX = this.x;
+		nextY = this.y;
 		moved = false;
 	}
 
