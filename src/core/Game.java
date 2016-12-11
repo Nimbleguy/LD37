@@ -6,10 +6,12 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 
 import entity.Entity;
+import events.Listener;
 
 public class Game {
 	public static void main(String[] args){
@@ -32,6 +34,7 @@ public class Game {
 	};
 
 	private static Game instance;
+	private List<Listener> listeners;
 
 	private ScreenManager sc;
 	private boolean running;
@@ -100,6 +103,18 @@ public class Game {
 
 	public ArrayList<Entity> getEntities() {
 		return entities;
+	}
+	
+	public void registerListener(Listener l){
+		listeners.add(l);
+	}
+	
+	public void unregisterListener(Listener l){
+		listeners.remove(l);
+	}
+	
+	public List<Listener> getListeners(){
+		return listeners;
 	}
 
 	public static void stop(){
