@@ -1,5 +1,6 @@
 package core;
 
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class Test implements Listener{
 	@Override
 	@CollisionEvent.Listen
 	public void listen(Event e){
-		Game.stop();
+		System.out.println("event triggered:");
+		System.out.printf("    %s",String.valueOf(((CollisionEvent)e).isNew()));
 	}
 }

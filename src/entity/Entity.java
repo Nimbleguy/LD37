@@ -55,31 +55,49 @@ public class Entity {
 	}
 
 	public void setX(double x){
+		double prevX = x;
 		this.x = x;
-		List<Entity> nowTouching = new ArrayList<Entity>();
-		for (Entity other : Game.getInstance().getEntities()){
-			if (other != this){
-				if (isTouching(other)){
-					nowTouching.add(other);
-					new CollisionEvent(this,other,touching.contains(other)).trigger();
+		boolean doMove = true;
+		if (x!=prevX){//it moved
+			List<Entity> nowTouching = new ArrayList<Entity>();
+			for (Entity other : Game.getInstance().getEntities()){
+				if (other != this){
+					if (isTouching(other)){
+						nowTouching.add(other);
+						doMove = doMove && new CollisionEvent(this,other,touching.contains(other)).trigger();
+					}
 				}
 			}
+			if (!doMove){
+				touching = nowTouching;
+			}
 		}
-		touching = nowTouching;
+		if (!doMove){
+			x=prevX;
+		}
 	}
 
 	public void setY(double y){
+		double prevY = y;
 		this.y = y;
-		List<Entity> nowTouching = new ArrayList<Entity>();
-		for (Entity other : Game.getInstance().getEntities()){
-			if (other != this){
-				if (isTouching(other)){
-					nowTouching.add(other);
-					new CollisionEvent(this,other,touching.contains(other)).trigger();
+		boolean doMove = true;
+		if (y!=prevY){//it moved
+			List<Entity> nowTouching = new ArrayList<Entity>();
+			for (Entity other : Game.getInstance().getEntities()){
+				if (other != this){
+					if (isTouching(other)){
+						nowTouching.add(other);
+						doMove = doMove && new CollisionEvent(this,other,touching.contains(other)).trigger();
+					}
 				}
 			}
+			if (!doMove){
+				touching = nowTouching;
+			}
 		}
-		touching = nowTouching;
+		if (!doMove){
+			y=prevY;
+		}
 	}
 
 	public int getDrawX(){
@@ -123,6 +141,7 @@ public class Entity {
 		double prevX = x;
 		double prevY = y;
 		double[] loc = vel.calcMove(x, y, true);
+		boolean doMove = true;
 		x = loc[0];
 		y = loc[1];
 		if (!(x==prevX && y==prevY)){//it moved
@@ -131,11 +150,17 @@ public class Entity {
 				if (other != this){
 					if (isTouching(other)){
 						nowTouching.add(other);
-						new CollisionEvent(this,other,touching.contains(other)).trigger();
+						doMove = doMove && new CollisionEvent(this,other,touching.contains(other)).trigger();
 					}
 				}
 			}
-			touching = nowTouching;
+			if (!doMove){
+				touching = nowTouching;
+			}
+		}
+		if (!doMove){
+			x=prevX;
+			y=prevY;
 		}
 	}
 }

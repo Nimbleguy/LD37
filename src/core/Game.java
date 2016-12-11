@@ -43,7 +43,7 @@ public class Game {
 
 		sc = new ScreenManager();
 		try{
-			DisplayMode dm = sc.findFirstCompatibleMode(sc.getCompatibleDisplayModes());
+			DisplayMode dm = sc.getCompatibleDisplayModes()[sc.getCompatibleDisplayModes().length-1];
 
 			frame = new JFrame();
 
@@ -83,6 +83,9 @@ public class Game {
 			g.drawImage(e.getSprite(), e.getDrawX(), e.getDrawY(), null);
 		}
 	}
+	
+	
+	///////////////setters and getters/////////////////
 
 	public void addEntity(Entity e){
 		entities.add(e);
@@ -124,6 +127,10 @@ public class Game {
 		return instance;
 	}
 
+	public JFrame getFrame(){
+		return frame;
+	}
+	
 	public ScreenManager getScreen(){
 		return sc;
 	}
@@ -132,7 +139,7 @@ public class Game {
 		toPaint.add(e);
 	}
 
-	public void remPaint(Entity e){
+	public void removePaint(Entity e){
 		toPaint.remove(e);
 	}
 }
