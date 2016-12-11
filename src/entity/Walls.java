@@ -14,30 +14,34 @@ public class Walls extends Entity{
 		}}, hitbox, x, y);
 	}
 
-	public static Hitbox generateHitbox(Image map){//maps must be black and white
-		BufferedImage image = (BufferedImage)map;//TODO test this function (gen hitbox)
+	public static Hitbox generateHitbox(BufferedImage map){//maps must be black and white
+		//TODO test this function (gen hitbox)
 
 
 		ArrayList<ArrayList<int[]>> rows = new ArrayList<ArrayList<int[]>>();
-		for (int y = 0; y<image.getWidth(); y++){
+		for (int y = 0; y<map.getWidth(); y++){
 			boolean recording = false;
 			ArrayList<int[]> row = new ArrayList<int[]>();
 			int low = -1,high=-1;
-			for (int x = 0; x<image.getWidth(); x++){
-				int rgb = image.getRGB(x, y);
-				if (rgb == 0){//black (part of the wall)
+			for (int x = 0; x<map.getWidth(); x++){
+				int rgb = map.getRGB(x, y);
+				if (rgb == -16777216){//black (part of the wall)
 					if (recording){
 						high=x;
 					}else{
 						low=x;
 					}
 					recording = true;
-				}else{
-					if (low != -1 && high != -1)
+				}else{//done recording
+					if (low != -1 && high != -1)//makes sure that there was a black line before it
 						row.add(new int[]{low,high});
 					recording = false;
+					low = -1;//reset
+					high = -1;//reset
 				}
 			}
+			if (low != -1 && high != -1)//incase entire thing was walls
+				row.add(new int[]{low,high});
 			rows.add(row);
 		}
 
@@ -50,7 +54,7 @@ public class Walls extends Entity{
 					for (int[] range2 : previous){
 						if (range1 == range2){
 							if (current.containsKey(range2)){
-								current.get(range2)[3]=range1[1];//fix second y value to higher
+								current.get(range2)[3]=y;//fix second y value to higher
 							}else{
 								current.put(range1, new int[]{range2[0],y-1,range1[0],y});
 							}
@@ -67,11 +71,12 @@ public class Walls extends Entity{
 		ArrayList<Rectangle2D.Double> boxes = new ArrayList<Rectangle2D.Double>();
 		ArrayList<int[]> used = new ArrayList<int[]>();
 		for (int[] range : current.values()){
-			if (!used.contains(range)){
+			if (!used.contains(range)){//so repeat values arent used
 				boxes.add(new Rectangle2D.Double(range[0], range[1], range[2], range[3]));
 			}
 			used.add(range);
 		}
+
 		return new Hitbox(boxes);
 	}
 }
