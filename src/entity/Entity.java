@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import core.Game;
 import core.util.Vector;
+import events.CollisionEvent;
 
 public class Entity {
 	private int spriteIndex;
@@ -99,7 +100,7 @@ public class Entity {
 			for (Entity other : Game.getInstance().getEntities()){
 				if (other != this){
 					if (isTouching(other)){
-						
+						new CollisionEvent(this,other).trigger();
 					}
 				}
 			}
