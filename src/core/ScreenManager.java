@@ -26,18 +26,6 @@ public class ScreenManager {
 		return vc.getDisplayModes();
 	}
 
-	public DisplayMode findFirstCompatibleMode(DisplayMode[] modes){
-		DisplayMode[] goodModes = vc.getDisplayModes();
-		for (int x=0;x<modes.length;x++){
-			for (int y=0;y<goodModes.length;y++){
-				if (displayModesMatch(modes[x],goodModes[y])){
-					return modes[x];
-				}
-			}
-		}
-		return null;
-	}
-
 	public DisplayMode getCurrentDisplayMode(){
 		return vc.getDisplayMode();
 	}
