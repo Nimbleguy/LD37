@@ -42,8 +42,6 @@ public class Game {
 		listeners = new ArrayList<Listener>();
 		running  = true;
 
-		new Test().init();
-
 		sc = new ScreenManager();
 		try{
 			dm = sc.getBestDisplayMode(sc.getCompatibleDisplayModes());
@@ -56,6 +54,7 @@ public class Game {
 
 			sc.setToFullScreen(frame, dm);
 			kh = new KeyboardHandler(frame);//registers the keyboard handler
+			new Play().init();
 			try{
 				while(running){
 					long t = System.currentTimeMillis();
@@ -99,19 +98,19 @@ public class Game {
 				break;
 
 			case KeyEvent.VK_UP:
-				Test.e1.setY(-1+Test.e1.getY());
+				Play.getPlayer().setY(-1+Play.getPlayer().getY());
 				break;
 
 			case KeyEvent.VK_DOWN:
-				Test.e1.setY(1+Test.e1.getY());
+				Play.getPlayer().setY(1+Play.getPlayer().getY());
 				break;
 
 			case KeyEvent.VK_RIGHT:
-				Test.e1.setX(1+Test.e1.getX());
+				Play.getPlayer().setX(1+Play.getPlayer().getX());
 				break;
 
 			case KeyEvent.VK_LEFT:
-				Test.e1.setX(-1+Test.e1.getX());
+				Play.getPlayer().setX(-1+Play.getPlayer().getX());
 				break;
 
 			default:

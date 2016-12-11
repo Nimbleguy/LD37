@@ -14,8 +14,8 @@ import events.Event;
 
 public class Play implements Listener{
 
-	private Player player;
-	private Walls[] walls = new Walls[16];
+	private static Player player;
+	private static Walls[] walls = new Walls[16];
 
 	public void init(){
 		player = new Player(10, 10);
@@ -36,10 +36,10 @@ public class Play implements Listener{
 		Game.getInstance().registerListener(this);
 	}
 
-	public Player getPlayer(){
+	public static Player getPlayer(){
 		return player;
 	}
-	public Walls[] getWalls(){
+	public static Walls[] getWalls(){
 		return walls;
 	}
 
