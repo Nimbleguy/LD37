@@ -155,40 +155,8 @@ public class Entity {
 	}
 
 	public void update(){
-
 		double[] loc = vel.calcMove(x, y, true);
-		nextX = loc[0];
-		nextY = loc[1];
-
-
-		if (!(nextX == x && nextY == y)){
-			moved = true;
-		}
-
-		if (moved){
-			boolean doMove = true;
-			double prevX = x;
-			double prevY = y;
-			x = nextX;
-			y = nextY;
-			List<Entity> nowTouching = new ArrayList<Entity>();
-			for (Entity other : Game.getInstance().getEntities()){
-				if (other != this){
-					if (isTouching(other)){
-						nowTouching.add(other);
-						doMove = doMove && new CollisionEvent(this,other,!touching.contains(other)).trigger();
-					}
-				}
-			}
-			if (doMove){
-				touching = nowTouching;
-			}else{
-				x=prevX;
-				y=prevY;
-			}
-		}
-		nextX = x;
-		nextY = y;
-		moved = false;
+		setX(loc[0]);
+		setY(loc[1]);
 	}
 }
