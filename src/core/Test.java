@@ -53,10 +53,6 @@ public class Test implements Listener{
 	@Override
 	@CollisionEvent.Listen
 	public void listen(Event e){
-		if (Game.getInstance().paintContains(((CollisionEvent)e).getDefender())){
-			Game.getInstance().removePaint(((CollisionEvent)e).getDefender());
-		}else{
-			Game.getInstance().addPaint(((CollisionEvent)e).getDefender());
-		}
+		((CollisionEvent)e).setCancelled(true);
 	}
 }
