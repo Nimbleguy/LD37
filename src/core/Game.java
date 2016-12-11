@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.JFrame;
 
@@ -88,7 +89,7 @@ public class Game {
 	}
 
 	public void doKeys(){
-		Iterator<Integer> iter = kh.getPressed().iterator();
+		Iterator<Integer> iter = new CopyOnWriteArrayList<Integer>(kh.getPressed()).iterator();
 		while(iter.hasNext()){
 			Integer i = iter.next();
 			switch(i){
