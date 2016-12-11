@@ -55,13 +55,13 @@ public class Game {
 			new KeyboardHandler(frame);//registers the keyboard handler
 			try{
 				while(running){
+					long t = System.currentTimeMillis();
 					Graphics2D g = sc.getGraphics();
 					sc.update();
 					drawEntities(g);
 					g.dispose();
-					Thread.sleep(10);
 					try{
-						Thread.sleep(20L);
+						Thread.sleep(Math.round((1000d / 60d) - (System.currentTimeMillis() - t)));
 					}catch(Exception e){
 						e.printStackTrace();
 					}
