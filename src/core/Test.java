@@ -38,7 +38,7 @@ public class Test implements Listener{
 		Game.getInstance().addEntity(e2);
 		Game.getInstance().addPaint(e1);
 		Game.getInstance().addPaint(e2);
-		
+
 		Game.getInstance().registerListener(this);
 	}
 
@@ -53,6 +53,10 @@ public class Test implements Listener{
 	@Override
 	@CollisionEvent.Listen
 	public void listen(Event e){
-		Game.stop();
+		if (Game.getInstance().paintContains(((CollisionEvent)e).getDefender())){
+			Game.getInstance().removePaint(((CollisionEvent)e).getDefender());
+		}else{
+			Game.getInstance().addPaint(((CollisionEvent)e).getDefender());
+		}
 	}
 }

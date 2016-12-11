@@ -93,7 +93,15 @@ public class Game {
 	public void removeEntity(Entity e){
 		entities.remove(e);
 	}
+	
+	public boolean entitiesContains(Entity e){
+		return entities.contains(e);
+	}
 
+	public boolean paintContains(Entity e){
+		return toPaint.contains(e);
+	}
+	
 	public void startPainting(Entity e){
 		toPaint.remove(e);
 	}

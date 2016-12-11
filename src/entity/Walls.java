@@ -15,8 +15,8 @@ public class Walls extends Entity{
 	}
 
 	public static Hitbox generateHitbox(BufferedImage map){//maps must be black and white
-
 		ArrayList<ArrayList<int[]>> rows = new ArrayList<ArrayList<int[]>>();
+		
 		for (int y = 0; y<map.getWidth(); y++){
 			boolean recording = false;
 			ArrayList<int[]> row = new ArrayList<int[]>();
@@ -70,11 +70,11 @@ public class Walls extends Entity{
 		ArrayList<int[]> used = new ArrayList<int[]>();
 		for (int[] range : current.values()){
 			if (!used.contains(range)){//so repeat values arent used
-				boxes.add(new Rectangle2D.Double(range[0], range[1], range[2], range[3]));
+				boxes.add(new Rectangle2D.Double(range[0], range[1], range[2]-range[0]+1, range[3]-range[1]+1));
 			}
 			used.add(range);
 		}
-
+		
 		return new Hitbox(boxes);
 	}
 }
