@@ -20,6 +20,10 @@ public class Game {
 	}
 
 	private static final DisplayMode[] modes1 = {//first two are resolution, third is bitdepth, fourth is refreshrate
+		new DisplayMode(2880,1800,32,0),
+		new DisplayMode(2880,1800,24,0),
+		new DisplayMode(2880,1800,16,0),
+
 		new DisplayMode(1280,800,32,0),
 		new DisplayMode(1280,800,24,0),
 		new DisplayMode(1280,800,16,0),
