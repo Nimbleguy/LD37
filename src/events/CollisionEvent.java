@@ -14,29 +14,36 @@ public class CollisionEvent implements Event{
 	private boolean cancelled;
 	private Entity e1;
 	private Entity e2;
-	public CollisionEvent(Entity agressor, Entity defender){
+	private boolean isNew;
+
+	public CollisionEvent(Entity agressor, Entity defender, boolean isNew){
 		e1 = agressor;
 		e2 = defender;
+		this.isNew = isNew;
 		cancelled = false;
 	}
-	
-	
+
+
+	public boolean isNew(){
+		return isNew;
+	}
+
 	public void setCancelled(boolean cancel){
 		cancelled = cancel;
 	}
-	
+
 	public boolean isCancelled(){
 		return cancelled;
 	}
-	
+
 	public Entity getAgressor(){
 		return e1;
 	}
-	
+
 	public Entity getDefender(){
 		return e2;
 	}
-	
+
 	@Retention(value=RetentionPolicy.RUNTIME)
 	@Target(value=ElementType.METHOD)
 	public @interface Listen{}
