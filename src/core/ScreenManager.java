@@ -1,14 +1,15 @@
 package core;
 
+import java.awt.Dimension;
 import java.awt.DisplayMode;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import java.util.HashMap;
 
 import javax.swing.JFrame;
 
@@ -17,6 +18,7 @@ import entity.Entity;
 public class ScreenManager {
 
 	private GraphicsDevice vc;
+	JFrame frame;
 
 	public ScreenManager(){
 		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -54,10 +56,16 @@ public class ScreenManager {
 	}
 
 	public void setToFullScreen(JFrame frame, DisplayMode dm){
-		frame.setUndecorated(true);
+		this.frame = frame;
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setUndecorated(false);
 		frame.setIgnoreRepaint(true);
 		frame.setResizable(false);
-		vc.setFullScreenWindow(frame);
+		frame.setSize(800, 800);
+		frame.setVisible(true);
+		frame.setLocation(vc.getDisplayMode().getWidth()/2, vc.getDisplayMode().getHeight()/2);
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 
 		if (dm != null&& vc.isDisplayChangeSupported()){
 			try{
@@ -70,9 +78,9 @@ public class ScreenManager {
 	}
 
 	public Graphics2D getGraphics(){
-		Window w = vc.getFullScreenWindow();
-		if (w != null){
-			BufferStrategy strategy = w.getBufferStrategy();
+		
+		if (frame != null){
+			BufferStrategy strategy = frame.getBufferStrategy();
 			return (Graphics2D)strategy.getDrawGraphics();
 		}else{
 			return null;
@@ -80,9 +88,9 @@ public class ScreenManager {
 	}
 
 	public void update(){
-		Window w = vc.getFullScreenWindow();
-		if (w != null){
-			BufferStrategy strategy = w.getBufferStrategy();
+		
+		if (frame != null){
+			BufferStrategy strategy = frame.getBufferStrategy();
 			if (!strategy.contentsLost()){
 				strategy.show();
 			}
@@ -94,12 +102,15 @@ public class ScreenManager {
 		}
 	}
 
-	public Window getFullScreenWindow(){
-		return vc.getFullScreenWindow();
+	public Window getWindow(){
+		if (frame == null){
+			System.err.println("Returned null in a getWindow()!");
+		}
+		return frame;
 	}
 
 	public int getWidth(){
-		if (vc.getFullScreenWindow() != null){
+		if (frame != null){
 			return vc.getFullScreenWindow().getWidth();
 		}else{
 			return -1;
@@ -107,7 +118,7 @@ public class ScreenManager {
 	}
 
 	public int getHeight(){
-		if (vc.getFullScreenWindow() != null){
+		if (frame != null){
 			return vc.getFullScreenWindow().getHeight();
 		}else{
 			return -1;
@@ -115,17 +126,15 @@ public class ScreenManager {
 	}
 	
 	public void restoreScreen(){
-		Window w = vc.getFullScreenWindow();
-		if (w != null){
-			w.dispose();
+		if (frame != null){
+			frame.dispose();
 		}
 		vc.setFullScreenWindow(null);
 	}
 	
 	public BufferedImage createCompatibleImage(int w, int h, int transparency){
-		Window wi = vc.getFullScreenWindow();
-		if (wi != null){
-			GraphicsConfiguration gc = wi.getGraphicsConfiguration();
+		if (frame != null){
+			GraphicsConfiguration gc = frame.getGraphicsConfiguration();
 			return gc.createCompatibleImage(w, h, transparency);
 		}
 		return null;

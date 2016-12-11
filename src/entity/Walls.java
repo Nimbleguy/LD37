@@ -15,8 +15,6 @@ public class Walls extends Entity{
 	}
 
 	public static Hitbox generateHitbox(BufferedImage map){//maps must be black and white
-		//TODO test this function (gen hitbox)
-
 
 		ArrayList<ArrayList<int[]>> rows = new ArrayList<ArrayList<int[]>>();
 		for (int y = 0; y<map.getWidth(); y++){

@@ -44,7 +44,7 @@ public class Game {
 		try{
 			dm = sc.getBestDisplayMode(sc.getCompatibleDisplayModes());
 
-			frame = new JFrame();
+			frame = new JFrame("Game");
 
 			frame.setBackground(Color.BLACK);
 			frame.setForeground(Color.WHITE);
@@ -121,7 +121,7 @@ public class Game {
 
 	public static Game getInstance(){
 		if (instance == null){
-			System.out.println("Game.getInstance() returned null!");
+			System.err.println("Game.getInstance() returned null!");
 		}
 		return instance;
 	}
