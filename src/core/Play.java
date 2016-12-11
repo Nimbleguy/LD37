@@ -34,8 +34,7 @@ public class Play implements Listener{
 					Game.getInstance().addPaint(walls[(i /	50) + (ii / 200)]);
 				}
 			}
-		}
-		catch(IOException e){
+		}catch(IOException e){
 			e.printStackTrace();
 		}
 		Game.getInstance().registerListener(this);
