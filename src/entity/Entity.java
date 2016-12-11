@@ -107,6 +107,7 @@ public class Entity {
 	}
 
 	public void update(){
+
 		double[] loc = vel.calcMove(nextX, nextY, true);
 		nextX = loc[0];
 		nextY = loc[1];
@@ -115,6 +116,7 @@ public class Entity {
 		}
 
 		if (moved){
+
 			boolean doMove = true;
 			double prevX = x;
 			double prevY = y;
@@ -132,8 +134,10 @@ public class Entity {
 			if (doMove){
 				touching = nowTouching;
 			}else{
-				x = prevX;
-				y = prevY;
+				x=prevX;
+				nextX=x;
+				y=prevY;
+				nextY=y;
 			}
 		}
 		moved = false;
