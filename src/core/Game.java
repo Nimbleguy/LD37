@@ -5,7 +5,9 @@ import java.awt.DisplayMode;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -29,6 +31,7 @@ public class Game {
 	private ArrayList<Entity> toPaint;
 	private JFrame frame;
 	private DisplayMode dm;
+	private KeyboardHandler kh;
 
 	public void run(){
 		System.out.println("Initializing");
@@ -51,7 +54,7 @@ public class Game {
 			frame.setFont(new Font("Arial", Font.PLAIN, 24));
 
 			sc.setToFullScreen(frame, dm);
-			new KeyboardHandler(frame);//registers the keyboard handler
+			kh = new KeyboardHandler(frame);//registers the keyboard handler
 			try{
 				while(running){
 					long t = System.currentTimeMillis();
@@ -59,6 +62,7 @@ public class Game {
 					sc.update();
 					drawEntities(g);
 					g.dispose();
+					doKeys();
 					try{
 						Thread.sleep(Math.max(Math.round((1000d / 60d) - (System.currentTimeMillis() - t)),0));
 					}catch(Exception e){
@@ -82,9 +86,42 @@ public class Game {
 			g.drawImage(e.getSprite(), e.getDrawX(), e.getDrawY(), null);
 		}
 	}
-	
-	
+
+	public void doKeys(){
+		Iterator<Integer> iter = kh.getPressed().iterator();
+		while(iter.hasNext()){
+			Integer i = iter.next();
+			switch(i){
+
+			case KeyEvent.VK_ESCAPE:
+				stop();
+				break;
+
+			case KeyEvent.VK_UP:
+				Test.e1.setY(-1+Test.e1.getY());
+				break;
+
+			case KeyEvent.VK_DOWN:
+				Test.e1.setY(1+Test.e1.getY());
+				break;
+
+			case KeyEvent.VK_RIGHT:
+				Test.e1.setX(1+Test.e1.getX());
+				break;
+
+			case KeyEvent.VK_LEFT:
+				Test.e1.setX(-1+Test.e1.getX());
+				break;
+
+			default:
+				break;
+			}
+		}
+	}
+
+
 	///////////////setters and getters/////////////////
+
 
 	public void addEntity(Entity e){
 		entities.add(e);
@@ -93,7 +130,7 @@ public class Game {
 	public void removeEntity(Entity e){
 		entities.remove(e);
 	}
-	
+
 	public boolean entitiesContains(Entity e){
 		return entities.contains(e);
 	}
@@ -101,7 +138,7 @@ public class Game {
 	public boolean paintContains(Entity e){
 		return toPaint.contains(e);
 	}
-	
+
 	public void startPainting(Entity e){
 		toPaint.remove(e);
 	}
@@ -137,7 +174,7 @@ public class Game {
 	public JFrame getFrame(){
 		return frame;
 	}
-	
+
 	public ScreenManager getScreen(){
 		return sc;
 	}
