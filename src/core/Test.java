@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import core.util.HitboxGenerator;
 import entity.Entity;
 import entity.Hitbox;
 import entity.Walls;
@@ -29,7 +30,7 @@ public class Test implements Listener{
 
 		e1 = new Entity(sprite,new Hitbox(hitbox),0,0);
 		try {
-			e2 = new Walls(i,Walls.generateHitbox(ImageIO.read(new File("assets/TestMap.png"))),300,300);
+			e2 = new Walls(i,HitboxGenerator.generateHitbox(ImageIO.read(new File("assets/TestMap.png"))),300,300);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -100,18 +100,22 @@ public class Game {
 
 			case KeyEvent.VK_UP:
 				Play.getPlayer().setY(Play.getPlayer().getY() - 2);
+				Play.getPlayer().setSpriteIndex(0);
 				break;
 
 			case KeyEvent.VK_DOWN:
 				Play.getPlayer().setY(Play.getPlayer().getY() + 2);
+				Play.getPlayer().setSpriteIndex(1);
 				break;
 
 			case KeyEvent.VK_RIGHT:
 				Play.getPlayer().setX(Play.getPlayer().getX() + 2);
+				Play.getPlayer().setSpriteIndex(2);
 				break;
 
 			case KeyEvent.VK_LEFT:
 				Play.getPlayer().setX(Play.getPlayer().getX() - 2);
+				Play.getPlayer().setSpriteIndex(2);
 				break;
 
 			default:

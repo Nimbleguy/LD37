@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import core.util.HitboxGenerator;
 import entity.Player;
 import entity.Walls;
 import events.Listener;
@@ -24,7 +25,7 @@ public class Play implements Listener{
 		try{
 			for(int i = 0; i < 800; i += 200){
 				for(int ii = 0; ii < 800; ii += 200){
-					walls[(i / 50) + (ii / 200)] = new Walls(new ImageIcon("assets/wall-" + String.valueOf((i / 50) + (ii / 200)) + "-0.png").getImage(), Walls.generateHitbox(ImageIO.read(new File("assets/whit-" + String.valueOf((i / 50) + (ii / 200)) + "-0.png"))), i, ii);
+					walls[(i / 50) + (ii / 200)] = new Walls(new ImageIcon("assets/wall-" + String.valueOf((i / 50) + (ii / 200)) + "-0.png").getImage(), HitboxGenerator.generateHitbox(ImageIO.read(new File("assets/whit-" + String.valueOf((i / 50) + (ii / 200)) + "-0.png"))), i, ii);
 					Game.getInstance().addEntity(walls[(i / 50) + (ii / 200)]);
 					Game.getInstance().addPaint(walls[(i /	50) + (ii / 200)]);
 				}
