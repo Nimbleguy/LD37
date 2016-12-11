@@ -1,21 +1,24 @@
 package entity;
 
-import java.awt.Image;
-import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import javax.swing.ImageIcon;
 
-import core.util.Convert;
+import javax.imageio.ImageIO;
+
+import core.util.HitboxGenerator;
 
 public class Player extends Entity{
-	public Player(double x, double y){
-		super(new ArrayList<Image>(Arrays.asList(new Image[]{new ImageIcon("assets/player0.png").getImage(),
-				new ImageIcon("assets/player1.png").getImage(),
-				new ImageIcon("assets/player2.png").getImage(),
-				new ImageIcon("assets/player3.png").getImage(),
-				new ImageIcon("assets/player0.png").getImage()})), new Hitbox(new ArrayList<Rectangle2D.Double>(Arrays.asList(
-						new Rectangle2D.Double(x, y, Convert.perWidth(new ImageIcon("assets/sprites/player.png").getImage().getWidth(null)), Convert.perHeight(new ImageIcon("assets/sprites/player.png").getImage().getHeight(null)))))), x, y);
+	
+	@SuppressWarnings("serial")
+	public Player(double x, double y) throws IOException{
+		super(new ArrayList<BufferedImage>(){{
+				this.add(ImageIO.read(new File("assets/player0")));
+				this.add(ImageIO.read(new File("assets/player1")));
+				this.add(ImageIO.read(new File("assets/player2")));
+				this.add(ImageIO.read(new File("assets/player3")));
+				}},HitboxGenerator.generateHitbox(ImageIO.read(new File("assets/player0"))),x,y);
 		this.setSpriteIndex(0);
 	}
 }

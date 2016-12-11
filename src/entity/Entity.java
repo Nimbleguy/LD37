@@ -1,7 +1,7 @@
 package entity;
 
-import java.awt.Image;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import events.CollisionEvent;
 
 public class Entity {
 	private int spriteIndex;
-	private ArrayList<Image> sprites;
+	private ArrayList<BufferedImage> sprites;
 	private double x;
 	private double y;
 	private double nextX;
@@ -23,8 +23,8 @@ public class Entity {
 	private List<Entity> touching;
 	private boolean moved;
 
-	public Entity(ArrayList<Image> sprites, Hitbox hitbox, double x, double y){
-		this.sprites = sprites;
+	public Entity(ArrayList<BufferedImage> arrayList, Hitbox hitbox, double x, double y){
+		this.sprites = arrayList;
 		this.spriteIndex = 0;
 		this.x = x;
 		this.y = y;
@@ -35,7 +35,7 @@ public class Entity {
 		vel = new Vector(0,0,0);
 	}
 
-	public ArrayList<Image> getSprites(){
+	public ArrayList<BufferedImage> getSprites(){
 		return sprites;
 	}
 
@@ -47,7 +47,7 @@ public class Entity {
 		this.spriteIndex = spriteIndex;
 	}
 
-	public void setSprites(ArrayList<Image> sprites){
+	public void setSprites(ArrayList<BufferedImage> sprites){
 		this.spriteIndex = 0;
 		this.sprites = sprites;
 	}
@@ -123,8 +123,15 @@ public class Entity {
 	public int getDrawY(){
 		return (int)Math.round(y);
 	}
+	
+	public void setHitbox(Hitbox h){
+		hitbox = h;
+	}
+	public Hitbox getHitbox(){
+		return hitbox;
+	}
 
-	public Image getSprite(){
+	public BufferedImage getSprite(){
 		return sprites.get(spriteIndex);
 	}
 
