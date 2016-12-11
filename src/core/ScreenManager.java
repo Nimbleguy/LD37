@@ -86,6 +86,8 @@ public class ScreenManager {
 				strategy.show();
 			}
 			for (Entity e : Game.getInstance().getEntities()){
+				if (e == null)
+					continue;
 				e.update();
 			}
 		}

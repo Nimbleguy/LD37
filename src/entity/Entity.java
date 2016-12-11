@@ -81,7 +81,8 @@ public class Entity {
 	public boolean isTouching(Entity other){//TODO check if works
 		for (Rectangle2D.Double boxxx : hitbox.getBoxes()){
 			for (Rectangle2D.Double otherBoxxx : other.hitbox.getBoxes()){
-				if (boxxx.intersects(otherBoxxx)){
+				Rectangle2D hell = boxxx.createIntersection(otherBoxxx);
+				if (!hell.isEmpty()){
 					return true;
 				}
 			}

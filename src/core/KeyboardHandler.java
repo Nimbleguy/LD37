@@ -24,8 +24,19 @@ public class KeyboardHandler implements KeyListener{
 			case KeyEvent.VK_ESCAPE:
 				Game.stop();
 				break;
-
-
+			case KeyEvent.VK_UP:
+				Test.e1.setY(Test.e1.getY()-10);
+				break;
+			case KeyEvent.VK_DOWN:
+				Test.e1.setY(Test.e1.getY()+10);
+				break;
+			case KeyEvent.VK_LEFT:
+				Test.e1.setX(Test.e1.getX()-10);
+				break;
+			case KeyEvent.VK_RIGHT:
+				Test.e1.setX(Test.e1.getX()+10);
+				break;
+				
 			}
 		}
 	}
@@ -33,7 +44,7 @@ public class KeyboardHandler implements KeyListener{
 	@Override
 	public void keyReleased(KeyEvent e){
 		if (pressed.contains(e.getKeyCode())){//stops this from being repeatedly called... (somehow?) (w/e)
-			pressed.remove(e.getKeyCode());
+			pressed.remove((Integer)e.getKeyCode());
 			switch(e.getKeyCode()){
 
 

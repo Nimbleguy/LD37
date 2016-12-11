@@ -36,7 +36,10 @@ public class Game {
 		sc = new ScreenManager();
 		toPaint = new ArrayList<Entity>();
 		entities = new ArrayList<Entity>();
+		listeners = new ArrayList<Listener>();
 		running  = true;
+
+		new Test().init();
 
 		sc = new ScreenManager();
 		try{
@@ -53,9 +56,9 @@ public class Game {
 			try{
 				while(running){
 					Graphics2D g = sc.getGraphics();
+					sc.update();
 					drawEntities(g);
 					g.dispose();
-					sc.update();
 					Thread.sleep(10);
 					try{
 						Thread.sleep(20L);
@@ -75,7 +78,8 @@ public class Game {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 10000, 10000);
 		for (Entity e : toPaint){
-			e.update();
+			if (e == null)
+				continue;
 			g.drawImage(e.getSprite(), e.getDrawX(), e.getDrawY(), null);
 		}
 	}
@@ -95,15 +99,15 @@ public class Game {
 	public ArrayList<Entity> getEntities() {
 		return entities;
 	}
-	
+
 	public void registerListener(Listener l){
 		listeners.add(l);
 	}
-	
+
 	public void unregisterListener(Listener l){
 		listeners.remove(l);
 	}
-	
+
 	public List<Listener> getListeners(){
 		return listeners;
 	}
@@ -114,6 +118,9 @@ public class Game {
 	}
 
 	public static Game getInstance(){
+		if (instance == null){
+			System.out.println("Game.getInstance() returned null!");
+		}
 		return instance;
 	}
 

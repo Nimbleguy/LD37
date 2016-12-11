@@ -39,7 +39,7 @@ public class CollisionEvent implements Event{
 	
 	@Retention(value=RetentionPolicy.RUNTIME)
 	@Target(value=ElementType.METHOD)
-	@interface Listen{}
+	public @interface Listen{}
 
 	@Override
 	public boolean trigger(){
