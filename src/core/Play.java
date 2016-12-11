@@ -1,12 +1,20 @@
 package core;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
+import entity.Player;
+import entity.Walls;
 import events.Listener;
 import events.CollisionEvent;
 import events.Event;
 
 public class Play implements Listener{
 
-	private Entity player;
+	private Player player;
 	private Walls[] walls = new Walls[16];
 
 	public void init(){
