@@ -8,6 +8,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Window;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
 import javax.swing.JFrame;
 
@@ -26,6 +27,18 @@ public class ScreenManager {
 		return vc.getDisplayModes();
 	}
 
+	public DisplayMode getBestDisplayMode(DisplayMode[] dms){
+		DisplayMode returnDM = null;
+		int highestPix = -1;
+		for (DisplayMode dm : dms){
+			if (dm.getHeight()*dm.getWidth() > highestPix){
+				returnDM = dm;
+				highestPix = dm.getHeight()*dm.getWidth();
+			}
+		}
+		return returnDM;
+	}
+	
 	public DisplayMode getCurrentDisplayMode(){
 		return vc.getDisplayMode();
 	}

@@ -5,10 +5,8 @@ import java.awt.DisplayMode;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GraphicsEnvironment;
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.reflect.Field;
 
 import javax.swing.JFrame;
 
@@ -44,7 +42,7 @@ public class Game {
 
 		sc = new ScreenManager();
 		try{
-			dm = sc.getCompatibleDisplayModes()[sc.getCompatibleDisplayModes().length-1];
+			dm = sc.getBestDisplayMode(sc.getCompatibleDisplayModes());
 
 			frame = new JFrame();
 
