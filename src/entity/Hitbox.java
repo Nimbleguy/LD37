@@ -4,13 +4,13 @@ import java.awt.geom.Rectangle2D;
 import java.util.List;
 
 public class Hitbox {
-	List<Rectangle2D> boxes;
-	
-	public Hitbox(List<Rectangle2D> boxes){
+	private List<Rectangle2D.Double> boxes;
+
+	public Hitbox(List<Rectangle2D.Double> boxes){
 		this.boxes = boxes;
 	}
-	
-	public List<Rectangle2D> getBoxes(){
+
+	public List<Rectangle2D.Double> getBoxes(){
 		return boxes;
 	}
 }

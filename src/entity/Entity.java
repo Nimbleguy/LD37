@@ -2,10 +2,12 @@ package entity;
 
 import java.awt.Image;
 import java.awt.geom.Rectangle2D;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import core.Game;
 import core.util.Vector;
+import core.util.Convert;
 import events.CollisionEvent;
 
 public class Entity {
@@ -77,14 +79,15 @@ public class Entity {
 	}
 
 	public boolean isTouching(Entity other){//TODO check if works
-		for (Rectangle2D box : hitbox.boxes){
+		for (Rectangle2D.Double boxxx : hitbox.getBoxes()){
+			Rectangle box = new Rectangle(Convert.pixWidth(boxxx.getX()), Convert.pixHeight(boxxx.getY()), Convert.pixWidth(boxxx.getWidth()), Convert.pixHeight(boxxx.getHeight()));
 			box.getBounds().x+=x;
 			box.getBounds().y+=y;
-			for (Rectangle2D otherBox : other.hitbox.boxes){
-				otherBox.getBounds().x+=other.x;
-				otherBox.getBounds().y+=other.y;
-				if (box.contains(otherBox))
+			for (Rectangle2D.Double otherBoxxx : other.hitbox.getBoxes()){
+				Rectangle otherBox = new Rectangle(Convert.pixWidth(otherBoxxx.getX()), Convert.pixHeight(otherBoxxx.getY()), Convert.pixWidth(otherBoxxx.getWidth()), Convert.pixHeight(otherBoxxx.getHeight()));
+				if (box.intersects(otherBox)){
 					return true;
+				}
 			}
 		}
 		return false;
