@@ -30,8 +30,7 @@ public class Test implements Listener{
 		Game.getInstance().addPaint(e1);
 		Game.getInstance().addPaint(e2);
 		
-		Game.getInstance()
-		.registerListener(this);
+		Game.getInstance().registerListener(this);
 	}
 
 	public Entity getE1(){

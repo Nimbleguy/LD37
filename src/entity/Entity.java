@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.geom.Rectangle2D;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.List;
 
 import core.Game;
 import core.util.Vector;
@@ -17,13 +18,15 @@ public class Entity {
 	private double y;
 	private Vector vel;
 	private Hitbox hitbox;
-
+	private List<Entity> touching;
+	
 	public Entity(ArrayList<Image> sprites, Hitbox hitbox, double x, double y){
 		this.sprites = sprites;
 		this.spriteIndex = 0;
 		this.x = x;
 		this.y = y;
 		this.hitbox = hitbox;
+		touching = new ArrayList<Entity>();
 		vel = new Vector(0,0,0);
 	}
 
@@ -53,24 +56,30 @@ public class Entity {
 
 	public void setX(double x){
 		this.x = x;
+		List<Entity> nowTouching = new ArrayList<Entity>();
 		for (Entity other : Game.getInstance().getEntities()){
 			if (other != this){
 				if (isTouching(other)){
-					new CollisionEvent(this,other).trigger();
+					nowTouching.add(other);
+					new CollisionEvent(this,other,touching.contains(other)).trigger();
 				}
 			}
 		}
+		touching = nowTouching;
 	}
 
 	public void setY(double y){
 		this.y = y;
+		List<Entity> nowTouching = new ArrayList<Entity>();
 		for (Entity other : Game.getInstance().getEntities()){
 			if (other != this){
 				if (isTouching(other)){
-					new CollisionEvent(this,other).trigger();
+					nowTouching.add(other);
+					new CollisionEvent(this,other,touching.contains(other)).trigger();
 				}
 			}
 		}
+		touching = nowTouching;
 	}
 
 	public int getDrawX(){
@@ -90,6 +99,10 @@ public class Entity {
 
 	public void addVelocity(Vector vec){
 		vel.add(vec);
+	}
+	
+	public List<Entity> getTouching(){
+		return touching;
 	}
 
 	public boolean isTouching(Entity other){//TODO check if works
@@ -113,13 +126,16 @@ public class Entity {
 		x = loc[0];
 		y = loc[1];
 		if (!(x==prevX && y==prevY)){//it moved
+			List<Entity> nowTouching = new ArrayList<Entity>();
 			for (Entity other : Game.getInstance().getEntities()){
 				if (other != this){
 					if (isTouching(other)){
-						new CollisionEvent(this,other).trigger();
+						nowTouching.add(other);
+						new CollisionEvent(this,other,touching.contains(other)).trigger();
 					}
 				}
 			}
+			touching = nowTouching;
 		}
 	}
 }
