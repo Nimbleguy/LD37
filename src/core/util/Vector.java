@@ -25,6 +25,10 @@ public class Vector {
 				y+(power*Math.sin(Math.toRadians(degrees)))
 		};
 	}
+	
+	public void setTraction(double amount){
+		traction=amount;
+	}
 
 	public void addDegrees(double amount){
 		degrees+=amount;
