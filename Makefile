@@ -1,6 +1,6 @@
 JAR := compiled.jar# Your jar file, with the .jar.
 ARGS := # Arguments for your jar file when running.
-PROP := -Djava.library.path=./natives/
+PROP :=
 SRCDIR := src# Directory where your .java files are. No trailing /.
 BINDIR := bin# Directory where your .class files should be. No trailing /.
 LIBDIR := lib# Where you want your libraries. No trailing /.
