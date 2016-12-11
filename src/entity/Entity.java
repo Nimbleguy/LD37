@@ -53,10 +53,24 @@ public class Entity {
 
 	public void setX(double x){
 		this.x = x;
+		for (Entity other : Game.getInstance().getEntities()){
+			if (other != this){
+				if (isTouching(other)){
+					new CollisionEvent(this,other).trigger();
+				}
+			}
+		}
 	}
 
 	public void setY(double y){
 		this.y = y;
+		for (Entity other : Game.getInstance().getEntities()){
+			if (other != this){
+				if (isTouching(other)){
+					new CollisionEvent(this,other).trigger();
+				}
+			}
+		}
 	}
 
 	public int getDrawX(){
