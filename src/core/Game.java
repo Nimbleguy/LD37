@@ -13,6 +13,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.JFrame;
 
+import core.util.Vector;
 import entity.Entity;
 import events.Listener;
 
@@ -98,19 +99,19 @@ public class Game {
 				break;
 
 			case KeyEvent.VK_UP:
-				Play.getPlayer().setY(-1+Play.getPlayer().getY());
+				Play.getPlayer().setY(Play.getPlayer().getY() - 2);
 				break;
 
 			case KeyEvent.VK_DOWN:
-				Play.getPlayer().setY(1+Play.getPlayer().getY());
+				Play.getPlayer().setY(Play.getPlayer().getY() + 2);
 				break;
 
 			case KeyEvent.VK_RIGHT:
-				Play.getPlayer().setX(1+Play.getPlayer().getX());
+				Play.getPlayer().setX(Play.getPlayer().getX() + 2);
 				break;
 
 			case KeyEvent.VK_LEFT:
-				Play.getPlayer().setX(-1+Play.getPlayer().getX());
+				Play.getPlayer().setX(Play.getPlayer().getX() - 2);
 				break;
 
 			default:
