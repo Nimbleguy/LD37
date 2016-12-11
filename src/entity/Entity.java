@@ -11,10 +11,10 @@ import events.CollisionEvent;
 public class Entity {
 	private int spriteIndex;
 	private ArrayList<Image> sprites;
-	double x;
-	double y;
-	Vector vel;
-	Hitbox hitbox;
+	private double x;
+	private double y;
+	private Vector vel;
+	private Hitbox hitbox;
 
 	public Entity(ArrayList<Image> sprites, Hitbox hitbox, double x, double y){
 		this.sprites = sprites;

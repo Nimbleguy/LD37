@@ -12,10 +12,10 @@ public class Convert{
 	}
 
 	public static int pixHeight(double per){
-		return (int)Math.round(per / Game.getInstance().getScreen().getCurrentDisplayMode().getHeight());
+		return (int)Math.round(per * Game.getInstance().getScreen().getCurrentDisplayMode().getHeight());
 	}
 
 	public static int pixWidth(double per){
-		return (int)Math.round(per / Game.getInstance().getScreen().getCurrentDisplayMode().getWidth());
+		return (int)Math.round(per * Game.getInstance().getScreen().getCurrentDisplayMode().getWidth());
 	}
 }
