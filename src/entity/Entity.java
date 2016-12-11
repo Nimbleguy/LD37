@@ -95,7 +95,9 @@ public class Entity {
 	public boolean isTouching(Entity other){//TODO check if works
 		for (Rectangle2D.Double boxxx : hitbox.getBoxes()){
 			for (Rectangle2D.Double otherBoxxx : other.hitbox.getBoxes()){
-				Rectangle2D hell = boxxx.createIntersection(otherBoxxx);
+				Rectangle hellothedarknessmyoldfriend = new Rectangle(Convert.pixWidth(boxxx.getX() + getX()), Convert.pixHeight(boxxx.getY() + getX()), Convert.pixWidth(boxxx.getWidth()), Convert.pixHeight(boxxx.getHeight()));
+				Rectangle ivecometotalktoyouagain = new Rectangle(Convert.pixWidth(otherBoxxx.getX() + other.getX()), Convert.pixHeight(otherBoxxx.getY() + other.getY()), Convert.pixWidth(otherBoxxx.getWidth()), Convert.pixHeight(otherBoxxx.getHeight()));
+				Rectangle2D hell = hellothedarknessmyoldfriend.createIntersection(ivecometotalktoyouagain);
 				if (!hell.isEmpty()){
 					return true;
 				}

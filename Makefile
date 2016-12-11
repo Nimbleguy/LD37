@@ -49,13 +49,13 @@ $(JAR) : $(ARTIFACTS) $(BINDIR) $(CFILE) $(MANIFEST)
 	cd $(BINDIR) && jar cvmf manifest $(JAR) * && mv $(JAR) ../$(JAR)
 
 $(BINDIR)/%.class : $(SRCDIR)/%.java $(ARTIFACTS)
-	javac -d $(BINDIR) -cp ".:$(LIBDIR)/*:$(BINDIR):$(SRCDIR)" $<
+	javac -g -d $(BINDIR) -cp ".:$(LIBDIR)/*:$(BINDIR):$(SRCDIR)" $<
 
 run : $(JAR)
 	java $(PROP) -jar $(JAR) $(ARGS)
 
 debug : build
-	java -Xdebug -Xnoagent -Djava.compiler=NONE  -Xrunjdwp:transport=dt_socket,server=y,address=8888,suspend=y -cp ".:$(LIBDIR)/*" $(subst .jar,,$(JAR)) $(ARGS)
+	java -Xdebug -Xnoagent -Djava.compiler=NONE  -Xrunjdwp:transport=dt_socket,server=y,address=8888,suspend=y $(PROP) -jar $(JAR) $(ARGS)
 
 jdb :
 	jdb -attach localhost:8888
