@@ -46,6 +46,6 @@ public class Test implements Listener{
 	@CollisionEvent.Listen
 	public void listen(Event e){
 		System.out.println("event triggered:");
-		System.out.printf("    %s",String.valueOf(((CollisionEvent)e).isNew()));
+		System.out.printf("    %s\n",String.valueOf(((CollisionEvent)e).isNew()));
 	}
 }

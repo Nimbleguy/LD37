@@ -60,7 +60,7 @@ public class Game {
 					drawEntities(g);
 					g.dispose();
 					try{
-						Thread.sleep(Math.round((1000d / 60d) - (System.currentTimeMillis() - t)));
+						Thread.sleep(Math.max(Math.round((1000d / 60d) - (System.currentTimeMillis() - t)),0));
 					}catch(Exception e){
 						e.printStackTrace();
 					}

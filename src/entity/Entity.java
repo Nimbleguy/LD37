@@ -55,48 +55,48 @@ public class Entity {
 	}
 
 	public void setX(double x){
-		double prevX = x;
+		double prevX = this.x;
 		this.x = x;
 		boolean doMove = true;
-		if (x!=prevX){//it moved
+		if (this.x!=prevX){//it moved
 			List<Entity> nowTouching = new ArrayList<Entity>();
 			for (Entity other : Game.getInstance().getEntities()){
 				if (other != this){
 					if (isTouching(other)){
 						nowTouching.add(other);
-						doMove = doMove && new CollisionEvent(this,other,touching.contains(other)).trigger();
+						doMove = doMove && new CollisionEvent(this,other,!touching.contains(other)).trigger();
 					}
 				}
 			}
-			if (!doMove){
+			if (doMove){
 				touching = nowTouching;
 			}
 		}
 		if (!doMove){
-			x=prevX;
+			this.x=prevX;
 		}
 	}
 
 	public void setY(double y){
-		double prevY = y;
+		double prevY = this.y;
 		this.y = y;
 		boolean doMove = true;
-		if (y!=prevY){//it moved
+		if (this.y!=prevY){//it moved
 			List<Entity> nowTouching = new ArrayList<Entity>();
 			for (Entity other : Game.getInstance().getEntities()){
 				if (other != this){
 					if (isTouching(other)){
 						nowTouching.add(other);
-						doMove = doMove && new CollisionEvent(this,other,touching.contains(other)).trigger();
+						doMove = doMove && new CollisionEvent(this,other,!touching.contains(other)).trigger();
 					}
 				}
 			}
-			if (!doMove){
+			if (doMove){
 				touching = nowTouching;
 			}
 		}
 		if (!doMove){
-			y=prevY;
+			this.y=prevY;
 		}
 	}
 
@@ -150,11 +150,11 @@ public class Entity {
 				if (other != this){
 					if (isTouching(other)){
 						nowTouching.add(other);
-						doMove = doMove && new CollisionEvent(this,other,touching.contains(other)).trigger();
+						doMove = doMove && new CollisionEvent(this,other,!touching.contains(other)).trigger();
 					}
 				}
 			}
-			if (!doMove){
+			if (doMove){
 				touching = nowTouching;
 			}
 		}
