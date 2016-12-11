@@ -30,6 +30,7 @@ public class Game {
 	private ArrayList<Entity> entities;
 	private ArrayList<Entity> toPaint;
 	private JFrame frame;
+	private DisplayMode dm;
 
 	public void run(){
 		System.out.println("Initializing");
@@ -43,7 +44,7 @@ public class Game {
 
 		sc = new ScreenManager();
 		try{
-			DisplayMode dm = sc.getCompatibleDisplayModes()[sc.getCompatibleDisplayModes().length-1];
+			dm = sc.getCompatibleDisplayModes()[sc.getCompatibleDisplayModes().length-1];
 
 			frame = new JFrame();
 
@@ -141,5 +142,8 @@ public class Game {
 
 	public void removePaint(Entity e){
 		toPaint.remove(e);
+	}
+	public DisplayMode getMode(){
+		return dm;
 	}
 }
