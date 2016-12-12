@@ -23,6 +23,7 @@ public class Button extends Entity implements Listener{
 	}
 
 	private static void init(){
+		init = true;
 		Game.getInstance().registerListener(new Button(null,null,null,-1,-1));
 	}
 	
