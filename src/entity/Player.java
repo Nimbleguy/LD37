@@ -21,12 +21,12 @@ public class Player extends Entity{
 				this.add(ImageIO.read(new File("assets/player2.png")));
 				this.add(ImageIO.read(new File("assets/player3.png")));
 				}},HitboxGenerator.generateHitbox(ImageIO.read(new File("assets/player0.png"))),x,y);
-		this.setSpriteIndex(0);
 		hitboxes = new ArrayList<Hitbox>();
 		hitboxes.add(HitboxGenerator.generateHitbox(ImageIO.read(new File("assets/player0.png"))));
 		hitboxes.add(HitboxGenerator.generateHitbox(ImageIO.read(new File("assets/player1.png"))));
 		hitboxes.add(HitboxGenerator.generateHitbox(ImageIO.read(new File("assets/player2.png"))));
 		hitboxes.add(HitboxGenerator.generateHitbox(ImageIO.read(new File("assets/player3.png"))));
+		this.setSpriteIndex(0);
 	}
 	
 	@Override
