@@ -16,17 +16,19 @@ public class Walls extends Entity implements Listener{
 			init();
 		}
 	}
-	
+
 	private static void init(){
 		init = true;
 		Game.getInstance().registerListener(new Walls(null,null,-1,-1));
 	}
-	
+
 	@CollisionEvent.Listen
 	public void listen(Event e){
-		((CollisionEvent)e).setCancelled(true);;
+		if (((CollisionEvent)e).getDefender() instanceof Walls || ((CollisionEvent)e).getAgressor() instanceof Walls){
+			((CollisionEvent)e).setCancelled(true);
+		}
 	}
-	
+
 	@Override
 	public void update(){
 		//no need to update

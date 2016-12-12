@@ -21,13 +21,6 @@ public class Play{
 
 	public void init(){
 		try{
-			player = new Player(77, 77);
-		}catch(IOException e){
-			e.printStackTrace();
-		}
-		Game.getInstance().addEntity(player);
-		Game.getInstance().addPaint(player);
-		try{
 			ArrayList<Walls>[] bwal = new ArrayList[4];
 			for(int i = 0; i < 4; i++){
 				bwal[i] = new ArrayList<Walls>();
@@ -81,6 +74,13 @@ public class Play{
 			Game.getInstance().addPaint(buttons[2]);
 			Game.getInstance().addEntity(buttons[3] = new Button(bwal[3], sprites, hitboxes, 500, 500));
 			Game.getInstance().addPaint(buttons[3]);
+			try{//play is last so they are foregroundmost
+				player = new Player(77, 77);
+			}catch(IOException e){
+				e.printStackTrace();
+			}
+			Game.getInstance().addEntity(player);
+			Game.getInstance().addPaint(player);
 		}catch(IOException e){
 			e.printStackTrace();
 		}
