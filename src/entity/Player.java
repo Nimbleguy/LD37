@@ -10,21 +10,15 @@ import javax.imageio.ImageIO;
 import core.util.HitboxGenerator;
 
 public class Player extends Entity{
-	
+
 	ArrayList<Hitbox> hitboxes;
-	
+
 	@SuppressWarnings("serial")
 	public Player(double x, double y) throws IOException{
 		super(new ArrayList<BufferedImage>(){{
-				this.add(ImageIO.read(new File("assets/player0.png")));
-				this.add(ImageIO.read(new File("assets/player1.png")));
-				this.add(ImageIO.read(new File("assets/player2.png")));
-				this.add(ImageIO.read(new File("assets/player3.png")));
-				}},new ArrayList<Hitbox>(){{
-				this.add(HitboxGenerator.generateHitbox(ImageIO.read(new File("assets/player0.png"))));
-				this.add(HitboxGenerator.generateHitbox(ImageIO.read(new File("assets/player1.png"))));
-				this.add(HitboxGenerator.generateHitbox(ImageIO.read(new File("assets/player2.png"))));
-				this.add(HitboxGenerator.generateHitbox(ImageIO.read(new File("assets/player3.png"))));
-				}},x,y);
+			this.add(ImageIO.read(new File("assets/playerSprite.png")));
+		}},new ArrayList<Hitbox>(){{
+			this.add(HitboxGenerator.generateHitbox(ImageIO.read(new File("assets/playerBox.png"))));
+		}},x,y);
 	}
 }

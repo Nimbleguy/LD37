@@ -4,20 +4,15 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
 import core.util.HitboxGenerator;
 import entity.Hitbox;
 import entity.Player;
 import entity.Walls;
-import events.Listener;
-import events.CollisionEvent;
-import events.Event;
 
-public class Play implements Listener{
+public class Play{
 
 	private static Player player;
 	private static Walls[] walls = new Walls[16];
@@ -57,7 +52,6 @@ public class Play implements Listener{
 		}catch(IOException e){
 			e.printStackTrace();
 		}
-		Game.getInstance().registerListener(this);
 	}
 
 	public static Player getPlayer(){
@@ -65,11 +59,5 @@ public class Play implements Listener{
 	}
 	public static Walls[] getWalls(){
 		return walls;
-	}
-
-	@Override
-	@CollisionEvent.Listen
-	public void listen(Event e){
-		((CollisionEvent)e).setCancelled(true);
 	}
 }

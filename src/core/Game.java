@@ -89,9 +89,8 @@ public class Game {
 	}
 
 	public void doKeys(){
-		Iterator<Integer> iter = new CopyOnWriteArrayList<Integer>(kh.getPressed()).iterator();
-		while(iter.hasNext()){
-			Integer i = iter.next();
+		List<Integer> pressed = new CopyOnWriteArrayList<Integer>(kh.getPressed());
+		for (Integer i : pressed){
 			switch(i){
 
 			case KeyEvent.VK_ESCAPE:
@@ -99,23 +98,35 @@ public class Game {
 				break;
 
 			case KeyEvent.VK_UP:
-				Play.getPlayer().setY(Play.getPlayer().getY() - 2);
-				Play.getPlayer().setSpriteIndex(0);
+				if (pressed.contains(KeyEvent.VK_LEFT) || pressed.contains(KeyEvent.VK_RIGHT)){
+					Play.getPlayer().setY(Play.getPlayer().getY() - 2.85);
+				}else{
+					Play.getPlayer().setY(Play.getPlayer().getY() - 4);
+				}
 				break;
 
 			case KeyEvent.VK_DOWN:
-				Play.getPlayer().setY(Play.getPlayer().getY() + 2);
-				Play.getPlayer().setSpriteIndex(1);
+				if (pressed.contains(KeyEvent.VK_LEFT) || pressed.contains(KeyEvent.VK_RIGHT)){
+					Play.getPlayer().setY(Play.getPlayer().getY() + 2.85);
+				}else{
+					Play.getPlayer().setY(Play.getPlayer().getY() + 4);
+				}
 				break;
 
 			case KeyEvent.VK_RIGHT:
-				Play.getPlayer().setX(Play.getPlayer().getX() + 2);
-				Play.getPlayer().setSpriteIndex(2);
+				if (pressed.contains(KeyEvent.VK_UP) || pressed.contains(KeyEvent.VK_DOWN)){
+					Play.getPlayer().setX(Play.getPlayer().getX() + 2.85);
+				}else{
+					Play.getPlayer().setX(Play.getPlayer().getX() + 4);
+				}
 				break;
 
 			case KeyEvent.VK_LEFT:
-				Play.getPlayer().setX(Play.getPlayer().getX() - 2);
-				Play.getPlayer().setSpriteIndex(2);
+				if (pressed.contains(KeyEvent.VK_UP) || pressed.contains(KeyEvent.VK_DOWN)){
+					Play.getPlayer().setX(Play.getPlayer().getX() - 2.85);
+				}else{
+					Play.getPlayer().setX(Play.getPlayer().getX() - 4);
+				}
 				break;
 
 			default:
