@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 
@@ -29,8 +30,8 @@ public class Test implements Listener{
 			ArrayList<Rectangle2D.Double> hitbox = new ArrayList<Rectangle2D.Double>();
 			hitbox.add(new Rectangle2D.Double(0,0,100,100));
 
-			e1 = new Entity(sprite,new Hitbox(hitbox),0,0);
-			e2 = new Walls(i,HitboxGenerator.generateHitbox(ImageIO.read(new File("assets/TestMap.png"))),300,300);
+			e1 = new Entity(sprite,(ArrayList<Hitbox>) Arrays.asList(new Hitbox[]{new Hitbox(hitbox)}),0,0);
+			e2 = new Walls((ArrayList<BufferedImage>) Arrays.asList(new BufferedImage[]{i}),(ArrayList<Hitbox>) Arrays.asList(HitboxGenerator.generateHitbox(ImageIO.read(new File("assets/TestMap.png")))),300,300);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -19,11 +19,11 @@ public class Entity {
 	private double nextX;
 	private double nextY;
 	private Vector vel;
-	private Hitbox hitbox;
+	private ArrayList<Hitbox> hitbox;
 	private List<Entity> touching;
 	private boolean moved;
 
-	public Entity(ArrayList<BufferedImage> arrayList, Hitbox hitbox, double x, double y){
+	public Entity(ArrayList<BufferedImage> arrayList, ArrayList<Hitbox> hitbox, double x, double y){
 		this.sprites = arrayList;
 		this.spriteIndex = 0;
 		this.x = x;
@@ -117,6 +117,14 @@ public class Entity {
 		moved = false;
 	}
 
+	public void addSprite(BufferedImage i){
+		sprites.add(i);
+	}
+	
+	public void addHitbox(Hitbox h){
+		hitbox.add(h);
+	}
+	
 	public int getDrawX(){
 		return (int)Math.round(x);
 	}
@@ -124,11 +132,11 @@ public class Entity {
 		return (int)Math.round(y);
 	}
 	
-	public void setHitbox(Hitbox h){
+	public void setHitbox(ArrayList<Hitbox> h){
 		hitbox = h;
 	}
 	public Hitbox getHitbox(){
-		return hitbox;
+		return hitbox.get(spriteIndex);
 	}
 
 	public BufferedImage getSprite(){
@@ -148,8 +156,8 @@ public class Entity {
 	}
 
 	public boolean isTouching(Entity other){
-		for (Rectangle2D.Double boxxx : hitbox.getBoxes()){
-			for (Rectangle2D.Double otherBoxxx : other.hitbox.getBoxes()){
+		for (Rectangle2D.Double boxxx : hitbox.get(spriteIndex).getBoxes()){
+			for (Rectangle2D.Double otherBoxxx : other.hitbox.get(other.spriteIndex).getBoxes()){
 				Rectangle hellothedarknessmyoldfriend = new Rectangle(Convert.pixWidth(boxxx.getX() + getX()), Convert.pixHeight(boxxx.getY() + getY()), Convert.pixWidth(boxxx.getWidth()), Convert.pixHeight(boxxx.getHeight()));
 				Rectangle ivecometotalktoyouagain = new Rectangle(Convert.pixWidth(otherBoxxx.getX() + other.getX()), Convert.pixHeight(otherBoxxx.getY() + other.getY()), Convert.pixWidth(otherBoxxx.getWidth()), Convert.pixHeight(otherBoxxx.getHeight()));
 				Rectangle2D hell = hellothedarknessmyoldfriend.createIntersection(ivecometotalktoyouagain);
