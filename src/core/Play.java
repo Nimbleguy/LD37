@@ -11,11 +11,13 @@ import core.util.HitboxGenerator;
 import entity.Hitbox;
 import entity.Player;
 import entity.Walls;
+import entity.Button;
 
 public class Play{
 
 	private static Player player;
 	private static Walls[] walls = new Walls[16];
+	private static Button[] buttons = new Button[4];
 
 	public void init(){
 		try{
@@ -59,5 +61,8 @@ public class Play{
 	}
 	public static Walls[] getWalls(){
 		return walls;
+	}
+	public static Button[] getButtons(){
+		return buttons;
 	}
 }
