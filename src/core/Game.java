@@ -7,13 +7,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.JFrame;
 
-import core.util.Vector;
 import entity.Entity;
 import events.Listener;
 
@@ -100,7 +98,7 @@ public class Game {
 
 			case KeyEvent.VK_UP:
 				if (pressed.contains(KeyEvent.VK_LEFT) || pressed.contains(KeyEvent.VK_RIGHT)){
-					Play.getPlayer().setY(Play.getPlayer().getY() - 2.85);
+					Play.getPlayer().setY(Play.getPlayer().getY() - 3);
 				}else{
 					Play.getPlayer().setY(Play.getPlayer().getY() - 4);
 				}
@@ -108,7 +106,7 @@ public class Game {
 
 			case KeyEvent.VK_DOWN:
 				if (pressed.contains(KeyEvent.VK_LEFT) || pressed.contains(KeyEvent.VK_RIGHT)){
-					Play.getPlayer().setY(Play.getPlayer().getY() + 2.85);
+					Play.getPlayer().setY(Play.getPlayer().getY() + 3);
 				}else{
 					Play.getPlayer().setY(Play.getPlayer().getY() + 4);
 				}
@@ -116,7 +114,7 @@ public class Game {
 
 			case KeyEvent.VK_RIGHT:
 				if (pressed.contains(KeyEvent.VK_UP) || pressed.contains(KeyEvent.VK_DOWN)){
-					Play.getPlayer().setX(Play.getPlayer().getX() + 2.85);
+					Play.getPlayer().setX(Play.getPlayer().getX() + 3);
 				}else{
 					Play.getPlayer().setX(Play.getPlayer().getX() + 4);
 				}
@@ -124,7 +122,7 @@ public class Game {
 
 			case KeyEvent.VK_LEFT:
 				if (pressed.contains(KeyEvent.VK_UP) || pressed.contains(KeyEvent.VK_DOWN)){
-					Play.getPlayer().setX(Play.getPlayer().getX() - 2.85);
+					Play.getPlayer().setX(Play.getPlayer().getX() - 3);
 				}else{
 					Play.getPlayer().setX(Play.getPlayer().getX() - 4);
 				}

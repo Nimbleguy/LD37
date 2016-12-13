@@ -1,11 +1,8 @@
 package core;
 
-import java.awt.Desktop;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -25,6 +22,7 @@ public class Play{
 
 	public void init(){		
 		try{
+			@SuppressWarnings("unchecked")
 			ArrayList<Walls>[] bwal = new ArrayList[4];
 			for(int i = 0; i < 4; i++){
 				bwal[i] = new ArrayList<Walls>();
