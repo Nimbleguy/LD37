@@ -11,6 +11,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 
 import core.util.HitboxGenerator;
+import entity.Goal;
 import entity.Hitbox;
 import entity.Player;
 import entity.Walls;
@@ -23,8 +24,9 @@ public class Play{
 	private static Button[] buttons = new Button[4];
 	private static Clip clip;
 
-	public void init(){
+	public void init(){		
 		try{
+			@SuppressWarnings("unchecked")
 			ArrayList<Walls>[] bwal = new ArrayList[4];
 			for(int i = 0; i < 4; i++){
 				bwal[i] = new ArrayList<Walls>();
@@ -78,6 +80,17 @@ public class Play{
 			Game.getInstance().addPaint(buttons[2]);
 			Game.getInstance().addEntity(buttons[3] = new Button(bwal[3], sprites, hitboxes, 500, 500));
 			Game.getInstance().addPaint(buttons[3]);
+			
+			
+			ArrayList<BufferedImage> sprites2 = new ArrayList<BufferedImage>();
+			ArrayList<Hitbox> hitboxes2 = new ArrayList<Hitbox>();
+			sprites2.add(ImageIO.read(new File("assets/goalSprite.png")));
+			hitboxes2.add(HitboxGenerator.generateHitbox(ImageIO.read(new File("assets/goalMap.png"))));
+			
+			Goal g = new Goal(sprites2,hitboxes2,675,675);
+			Game.getInstance().addEntity(g);
+			Game.getInstance().addPaint(g);
+			
 			try{//play is last so they are foregroundmost
 				player = new Player(77, 77);
 			}catch(IOException e){
