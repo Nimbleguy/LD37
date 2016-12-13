@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
 
 import core.util.HitboxGenerator;
 import entity.Hitbox;
@@ -18,6 +21,7 @@ public class Play{
 	private static Player player;
 	private static Walls[] walls = new Walls[16];
 	private static Button[] buttons = new Button[4];
+	private static Clip clip;
 
 	public void init(){
 		try{
@@ -81,7 +85,14 @@ public class Play{
 			}
 			Game.getInstance().addEntity(player);
 			Game.getInstance().addPaint(player);
-		}catch(IOException e){
+			AudioInputStream sound = AudioSystem.getAudioInputStream(new File("assets/music.wav"));
+			clip = AudioSystem.getClip();
+			clip.open(sound);
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+			clip.setFramePosition(0);
+			clip.start();
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
