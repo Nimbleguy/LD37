@@ -33,10 +33,10 @@ public class Play{
 			}
 			for (int i = 0; i<4; i++){
 				for (int ii = 0; ii<4; ii++){
-					BufferedImage sprite1 = ImageIO.read(new File("assets/wall-" + String.valueOf((4*i)+ii) + "-0.png"));
-					Hitbox hitbox1 = HitboxGenerator.generateHitbox(ImageIO.read(new File("assets/whit-" + String.valueOf((4*i)+ii) + "-0.png")));
-					BufferedImage sprite2 = ImageIO.read(new File("assets/wall-" + String.valueOf((4*i)+ii) + "-1.png"));
-					Hitbox hitbox2 = HitboxGenerator.generateHitbox(ImageIO.read(new File("assets/whit-" + String.valueOf((4*i)+ii) + "-1.png")));
+					BufferedImage sprite1 = ImageIO.read(new File("src/assets/wall-" + String.valueOf((4*i)+ii) + "-0.png"));
+					Hitbox hitbox1 = HitboxGenerator.generateHitbox(ImageIO.read(new File("src/assets/whit-" + String.valueOf((4*i)+ii) + "-0.png")));
+					BufferedImage sprite2 = ImageIO.read(new File("src/assets/wall-" + String.valueOf((4*i)+ii) + "-1.png"));
+					Hitbox hitbox2 = HitboxGenerator.generateHitbox(ImageIO.read(new File("src/assets/whit-" + String.valueOf((4*i)+ii) + "-1.png")));
 					
 					ArrayList<BufferedImage> sprites = new ArrayList<BufferedImage>();
 					ArrayList<Hitbox> hitboxes = new ArrayList<Hitbox>();
@@ -66,8 +66,8 @@ public class Play{
 					Game.getInstance().addPaint(w);
 				}
 			}
-			BufferedImage spr = ImageIO.read(new File("assets/ButtonSprite1.png"));
-			Hitbox hit = HitboxGenerator.generateHitbox(ImageIO.read(new File("assets/ButtonHitmap1.png")));
+			BufferedImage spr = ImageIO.read(new File("src/assets/ButtonSprite1.png"));
+			Hitbox hit = HitboxGenerator.generateHitbox(ImageIO.read(new File("src/assets/ButtonHitmap1.png")));
 			ArrayList<BufferedImage> sprites = new ArrayList<BufferedImage>();
 			ArrayList<Hitbox> hitboxes = new ArrayList<Hitbox>();
 			sprites.add(spr);
@@ -84,8 +84,8 @@ public class Play{
 			
 			ArrayList<BufferedImage> sprites2 = new ArrayList<BufferedImage>();
 			ArrayList<Hitbox> hitboxes2 = new ArrayList<Hitbox>();
-			sprites2.add(ImageIO.read(new File("assets/goalSprite.png")));
-			hitboxes2.add(HitboxGenerator.generateHitbox(ImageIO.read(new File("assets/goalMap.png"))));
+			sprites2.add(ImageIO.read(new File("src/assets/goalSprite.png")));
+			hitboxes2.add(HitboxGenerator.generateHitbox(ImageIO.read(new File("src/assets/goalMap.png"))));
 			
 			Goal g = new Goal(sprites2,hitboxes2,675,675);
 			Game.getInstance().addEntity(g);
@@ -98,7 +98,7 @@ public class Play{
 			}
 			Game.getInstance().addEntity(player);
 			Game.getInstance().addPaint(player);
-			AudioInputStream sound = AudioSystem.getAudioInputStream(new File("assets/music.wav"));
+			AudioInputStream sound = AudioSystem.getAudioInputStream(new File("src/assets/music.wav"));
 			clip = AudioSystem.getClip();
 			clip.open(sound);
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -118,5 +118,9 @@ public class Play{
 	}
 	public static Button[] getButtons(){
 		return buttons;
+	}
+	
+	public static void stopSoundLoop(){
+		clip.stop();
 	}
 }

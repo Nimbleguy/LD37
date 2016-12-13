@@ -16,9 +16,9 @@ public class Player extends Entity{
 	@SuppressWarnings("serial")
 	public Player(double x, double y) throws IOException{
 		super(new ArrayList<BufferedImage>(){{
-			this.add(ImageIO.read(new File("assets/playerSprite.png")));
+			this.add(ImageIO.read(new File("src/assets/playerSprite.png")));
 		}},new ArrayList<Hitbox>(){{
-			this.add(HitboxGenerator.generateHitbox(ImageIO.read(new File("assets/playerBox.png"))));
+			this.add(HitboxGenerator.generateHitbox(ImageIO.read(new File("src/assets/playerBox.png"))));
 		}},x,y);
 	}
 }

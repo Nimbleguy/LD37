@@ -176,6 +176,7 @@ public class Game {
 
 	public static void stop(){
 		System.out.println("Terminating");
+		Play.stopSoundLoop();
 		instance.running = false;
 	}
 

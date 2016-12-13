@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 import core.Game;
+import core.Play;
 import events.CollisionEvent;
 import events.Event;
 import events.Listener;
@@ -26,13 +27,14 @@ public class Goal extends Entity implements Listener{
 	@CollisionEvent.Listen
 	public void listen(Event e){
 		if (((CollisionEvent)e).isNew() &&((CollisionEvent)e).getDefender() == this){
-			try {
+			try{
+				Play.stopSoundLoop();
 				Desktop.getDesktop().browse(new URL("https://www.youtube.com/watch?v=1Bix44C1EzY").toURI());
 				Game.getInstance().clearPaint();
 				Game.getInstance().addPaint(new Entity(new ArrayList<BufferedImage>(){{
-					this.add(ImageIO.read(new File("assets/congrats.png")));
+					this.add(ImageIO.read(new File("src/assets/congrats.png")));
 				}},new ArrayList<Hitbox>(),0,0));
-			} catch (IOException | URISyntaxException e1) {
+			}catch (IOException | URISyntaxException e1){
 				e1.printStackTrace();
 			}
 		}
