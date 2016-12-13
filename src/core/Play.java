@@ -1,13 +1,17 @@
 package core;
 
+import java.awt.Desktop;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
 import core.util.HitboxGenerator;
+import entity.Goal;
 import entity.Hitbox;
 import entity.Player;
 import entity.Walls;
@@ -19,7 +23,7 @@ public class Play{
 	private static Walls[] walls = new Walls[16];
 	private static Button[] buttons = new Button[4];
 
-	public void init(){
+	public void init(){		
 		try{
 			ArrayList<Walls>[] bwal = new ArrayList[4];
 			for(int i = 0; i < 4; i++){
@@ -74,6 +78,17 @@ public class Play{
 			Game.getInstance().addPaint(buttons[2]);
 			Game.getInstance().addEntity(buttons[3] = new Button(bwal[3], sprites, hitboxes, 500, 500));
 			Game.getInstance().addPaint(buttons[3]);
+			
+			
+			ArrayList<BufferedImage> sprites2 = new ArrayList<BufferedImage>();
+			ArrayList<Hitbox> hitboxes2 = new ArrayList<Hitbox>();
+			sprites2.add(ImageIO.read(new File("assets/goalSprite.png")));
+			hitboxes2.add(HitboxGenerator.generateHitbox(ImageIO.read(new File("assets/goalMap.png"))));
+			
+			Goal g = new Goal(sprites2,hitboxes2,675,675);
+			Game.getInstance().addEntity(g);
+			Game.getInstance().addPaint(g);
+			
 			try{//play is last so they are foregroundmost
 				player = new Player(77, 77);
 			}catch(IOException e){

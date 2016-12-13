@@ -56,6 +56,7 @@ public class Game {
 			sc.setToFullScreen(frame, dm);
 			kh = new KeyboardHandler(frame);//registers the keyboard handler
 			new Play().init();
+			
 			try{
 				while(running){
 					long t = System.currentTimeMillis();
@@ -189,6 +190,10 @@ public class Game {
 
 	public JFrame getFrame(){
 		return frame;
+	}
+	
+	public void clearPaint(){
+		toPaint.clear();
 	}
 
 	public ScreenManager getScreen(){
