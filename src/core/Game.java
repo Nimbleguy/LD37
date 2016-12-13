@@ -54,7 +54,7 @@ public class Game {
 			sc.setToFullScreen(frame, dm);
 			kh = new KeyboardHandler(frame);//registers the keyboard handler
 			new Play().init();
-			
+
 			try{
 				while(running){
 					long t = System.currentTimeMillis();
@@ -97,35 +97,19 @@ public class Game {
 				break;
 
 			case KeyEvent.VK_UP:
-				if (pressed.contains(KeyEvent.VK_LEFT) || pressed.contains(KeyEvent.VK_RIGHT)){
-					Play.getPlayer().setY(Play.getPlayer().getY() - 3);
-				}else{
-					Play.getPlayer().setY(Play.getPlayer().getY() - 4);
-				}
+				Play.getPlayer().setY(Play.getPlayer().getY() - 4);
 				break;
 
 			case KeyEvent.VK_DOWN:
-				if (pressed.contains(KeyEvent.VK_LEFT) || pressed.contains(KeyEvent.VK_RIGHT)){
-					Play.getPlayer().setY(Play.getPlayer().getY() + 3);
-				}else{
-					Play.getPlayer().setY(Play.getPlayer().getY() + 4);
-				}
+				Play.getPlayer().setY(Play.getPlayer().getY() + 4);
 				break;
 
 			case KeyEvent.VK_RIGHT:
-				if (pressed.contains(KeyEvent.VK_UP) || pressed.contains(KeyEvent.VK_DOWN)){
-					Play.getPlayer().setX(Play.getPlayer().getX() + 3);
-				}else{
-					Play.getPlayer().setX(Play.getPlayer().getX() + 4);
-				}
+				Play.getPlayer().setX(Play.getPlayer().getX() + 4);
 				break;
 
 			case KeyEvent.VK_LEFT:
-				if (pressed.contains(KeyEvent.VK_UP) || pressed.contains(KeyEvent.VK_DOWN)){
-					Play.getPlayer().setX(Play.getPlayer().getX() - 3);
-				}else{
-					Play.getPlayer().setX(Play.getPlayer().getX() - 4);
-				}
+				Play.getPlayer().setX(Play.getPlayer().getX() - 4);
 				break;
 
 			default:
@@ -190,7 +174,7 @@ public class Game {
 	public JFrame getFrame(){
 		return frame;
 	}
-	
+
 	public void clearPaint(){
 		toPaint.clear();
 	}
